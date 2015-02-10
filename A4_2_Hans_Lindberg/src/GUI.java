@@ -7,8 +7,8 @@ import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
-import java.util.*;  
 
+import java.util.*;
 
 public class GUI extends JFrame {
 
