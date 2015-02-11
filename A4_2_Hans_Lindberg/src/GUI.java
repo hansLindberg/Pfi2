@@ -58,6 +58,7 @@ public class GUI extends JFrame {
 		
 		//Fills the list with animals and writes it into the textarea.
 		
+		//Katten skriver inte ut sin nursing time
 		animals.add(new Snake("slingrigus serpentus", false));
 		animals.add(new Dog("hund", "barkus svansus", true));
 		animals.add(new Cat("purrus meowus", 10, 5));

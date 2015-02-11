@@ -15,7 +15,8 @@ public class Cat extends Mammal {
 	public int getNumberOfLives(){
 		return this.numberOfLives;
 	}
-
+	
+	//Katten skriver inte ut sin nursing time
 	@Override
 	public String getInfo() {
 		// TODO Auto-generated method stub
