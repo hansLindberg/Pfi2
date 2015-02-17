@@ -3,6 +3,8 @@ public class ClockLogic implements ClockInterface {
 	private DigitalClockGUI clockGUI;
 	private int alarmHour;
 	private int alarmMinute;
+	private int finalHour;
+	private int finalMinute;
 
 	public ClockLogic(DigitalClockGUI clockIn) {
 		this.clockGUI = clockIn;
@@ -15,14 +17,21 @@ public class ClockLogic implements ClockInterface {
 	public void setAlarm(int hours, int minutes) {
 		this.alarmHour = hours;
 		this.alarmMinute = minutes;
+		System.out.println("alarm set" + hours + " " + minutes);
 	}
 
 	public void clearAlarm() {
-		
+		clockGUI.labelAlarm.setText("No Alarm");
+		clockGUI.labelAlarmNotice.setText("");
+		clockGUI.labelMessage.setText("");
+		this.alarmHour = 100;
+		this.alarmMinute = 100;
 	}
 
 	@Override
 	public void update(int hours, int minutes, int seconds) {
+		// Some variables that will create a '0' if a number is single digit, to
+		// make it nicer.
 		String zero1 = "";
 		String zero2 = "";
 		String zero3 = "";
@@ -37,16 +46,25 @@ public class ClockLogic implements ClockInterface {
 			zero3 = "0";
 		}
 
-		if (this.alarmHour == hours && this.alarmMinute == minutes) {
-			clockGUI.alarm(true);
-		}
+		// Compiles the values to nice, readable strings.
+		String hourString = zero1 + Integer.toString(hours);
+		String minuteString = zero2 + Integer.toString(minutes);
+		String secondString = zero3 + Integer.toString(seconds);
+		String finalTimeString = hourString + ":" + minuteString + ":"
+				+ secondString;
 
-		System.out.println("label set called upon");
-
-		clockGUI.setTimeOnLabel(zero1 + hours + ":" + zero2 + minutes + ":"
-				+ zero3 + seconds);
+		clockGUI.setTimeOnLabel(finalTimeString);
+		
 		zero1 = "";
 		zero2 = "";
 		zero3 = "";
+		
+		finalHour = hours;
+		finalMinute = minutes;
+
+		if (this.alarmHour == finalHour && this.alarmMinute == finalMinute) {
+			System.out.println("Ring ring!");
+			clockGUI.alarm(true);
+		}
 	}
 }
