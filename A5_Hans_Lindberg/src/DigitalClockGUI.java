@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.Random;
 
+@SuppressWarnings("serial")
 public class DigitalClockGUI extends JFrame {
 
 	private JPanel contentPane;
@@ -28,6 +29,9 @@ public class DigitalClockGUI extends JFrame {
 	ClockLogic clockLogic;
 
 	JLabel labelTime = new JLabel("00:00:00");
+	JLabel labelAlarmNotice = new JLabel("");
+	final JLabel labelMessage = new JLabel("");
+	final JLabel labelAlarm = new JLabel("No alarm");
 
 	/**
 	 * Launch the application.
@@ -71,16 +75,18 @@ public class DigitalClockGUI extends JFrame {
 		lblNewLabel_1.setBounds(10, 236, 11, 14);
 		contentPane.add(lblNewLabel_1);
 
-		final JLabel labelAlarm = new JLabel("No alarm");
 		labelAlarm.setBounds(54, 66, 142, 14);
 		contentPane.add(labelAlarm);
+
+		labelAlarmNotice.setFont(new Font("Tahoma", Font.BOLD, 14));
+		labelAlarmNotice.setBounds(15, 111, 46, 14);
+		contentPane.add(labelAlarmNotice);
 
 		fieldH = new JTextField();
 		fieldH.setBounds(31, 233, 30, 20);
 		contentPane.add(fieldH);
 		fieldH.setColumns(10);
 
-		final JLabel labelMessage = new JLabel("");
 		labelMessage.setForeground(Color.BLACK);
 		labelMessage.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC,
 				12));
@@ -99,9 +105,9 @@ public class DigitalClockGUI extends JFrame {
 		JButton buttonClear = new JButton("Clear Alarm");
 		buttonClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				labelAlarm.setText("No Alarm");
 				fieldH.setText("");
 				fieldM.setText("");
+				clockLogic.clearAlarm();
 			}
 		});
 		buttonClear.setBounds(309, 232, 115, 23);
@@ -133,6 +139,9 @@ public class DigitalClockGUI extends JFrame {
 					labelAlarm.setText(zero4 + hourCheck + ":" + zero5
 							+ minuteCheck);
 
+					// Sets the alarm
+					clockLogic.setAlarm(hourCheck, minuteCheck);
+
 					// Changes the color of the background, disco clock!!
 					float hue = rand.nextFloat();
 					float sat = (rand.nextInt(2000) + 5000) / 10000f;
@@ -145,6 +154,7 @@ public class DigitalClockGUI extends JFrame {
 					zero5 = "";
 
 					labelMessage.setText("");
+					labelAlarmNotice.setText("");
 
 				}
 
@@ -171,10 +181,11 @@ public class DigitalClockGUI extends JFrame {
 
 	public void setTimeOnLabel(String time) {
 		labelTime.setText(time);
-		System.out.println("label set");
 	}
 
 	public void alarm(boolean activate) {
-
+		if (true) {
+			labelAlarmNotice.setText("ALARM!!!");
+		}
 	}
 }
