@@ -1,6 +1,6 @@
 import java.util.Calendar;
 
-public class ClockThread implements Runnable {
+public class ClockThread extends Thread {
 	
 	private ClockInterface clockInterface;
 	
@@ -13,9 +13,9 @@ public class ClockThread implements Runnable {
 	}
 
 	public void run(){
-		System.out.println("hej???");
+		System.out.println("Thread run");
 		while (running == true){
-			System.out.println("hejehj");
+			System.out.println("Thread run true");
 			try {
 				Thread.sleep(900);
 			} catch (InterruptedException e) {

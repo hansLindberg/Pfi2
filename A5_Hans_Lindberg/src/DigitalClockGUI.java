@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Random;
 
 
 public class DigitalClockGUI extends JFrame {
@@ -20,9 +21,11 @@ public class DigitalClockGUI extends JFrame {
 	private JTextField fieldH;
 	private JTextField fieldM;
 	
-	private JLabel labelTime = new JLabel("00:00:00");
+	Random rand = new Random();
 	
-	private ClockLogic clockLogic;
+	ClockLogic clockLogic;
+	
+	JLabel labelTime = new JLabel("00:00:00");
 
 	/**
 	 * Launch the application.
@@ -57,6 +60,8 @@ public class DigitalClockGUI extends JFrame {
 		contentPane.setLayout(null);
 		
 		
+		clockLogic = new ClockLogic(this);
+		
 		labelTime.setFont(new Font("Cooper Std Black", Font.PLAIN, 28));
 		labelTime.setBounds(54, 11, 124, 44);
 		contentPane.add(labelTime);
@@ -65,10 +70,20 @@ public class DigitalClockGUI extends JFrame {
 		lblNewLabel_1.setBounds(10, 236, 11, 14);
 		contentPane.add(lblNewLabel_1);
 		
+		final JLabel labelAlarm = new JLabel("No alarm");
+		labelAlarm.setBounds(54, 66, 142, 14);
+		contentPane.add(labelAlarm);
+		
 		fieldH = new JTextField();
 		fieldH.setBounds(31, 233, 30, 20);
 		contentPane.add(fieldH);
 		fieldH.setColumns(10);
+		
+		JLabel lblGetYour = new JLabel("");
+		lblGetYour.setForeground(Color.BLACK);
+		lblGetYour.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 15));
+		lblGetYour.setBounds(10, 91, 216, 116);
+		contentPane.add(lblGetYour);
 		
 		JLabel lblM = new JLabel("M:");
 		lblM.setBounds(71, 236, 17, 14);
@@ -82,6 +97,13 @@ public class DigitalClockGUI extends JFrame {
 		JButton buttonClear = new JButton("Clear Alarm");
 		buttonClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				//Clears the fields and resets the label
+				fieldH.setText(null);
+				fieldM.setText(null);
+				labelAlarm.setText("No Alarm");
 			}
 		});
 		buttonClear.setBounds(309, 232, 115, 23);
@@ -90,6 +112,25 @@ public class DigitalClockGUI extends JFrame {
 		JButton buttonSet = new JButton("Set Alarm");
 		buttonSet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//Checks if the times set are legal.
+				private int hourCheck = Integer.parseInt(fieldH.getText());
+				private int minuteCheck = Integer.parseInt(fieldM.getText());
+				
+				if (){
+				
+				
+					//Changes the alarm label to match the input alarm
+					labelAlarm.setText(fieldH.getText() + ":" + fieldM.getText());
+				
+				
+					//Changes the color of the background, disco clock!!
+					float hue = rand.nextFloat();
+					float sat = (rand.nextInt(2000) + 5000) / 10000f;
+					float lum = 0.8f;
+					Color color = Color.getHSBColor(hue, sat, lum);
+				
+				contentPane.setBackground(color);
+				}
 			}
 		});
 		buttonSet.setBounds(184, 232, 115, 23);
@@ -98,10 +139,6 @@ public class DigitalClockGUI extends JFrame {
 		JLabel lblTime = new JLabel("Time:");
 		lblTime.setBounds(10, 29, 46, 14);
 		contentPane.add(lblTime);
-		
-		JLabel labelAlarm = new JLabel("00:00");
-		labelAlarm.setBounds(54, 66, 142, 14);
-		contentPane.add(labelAlarm);
 		
 		JLabel lblAlarm = new JLabel("Alarm:");
 		lblAlarm.setBounds(10, 66, 46, 14);
@@ -114,7 +151,7 @@ public class DigitalClockGUI extends JFrame {
 		contentPane.add(imageClock);
 	}
 	
-	public void setTimeOnLabel(String time){
+	public void setTimeOnLabel(String time){		
 		labelTime.setText(time);
 		System.out.println("label set");
 	}

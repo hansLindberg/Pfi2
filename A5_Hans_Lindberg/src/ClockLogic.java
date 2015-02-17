@@ -7,6 +7,9 @@ public class ClockLogic implements ClockInterface {
 	
 	public ClockLogic(DigitalClockGUI clockIn){
 		this.clockGUI = clockIn;
+		
+		Thread t = new ClockThread(this);
+		t.start();
 		System.out.println("clockGUI created");
 	}
 	
@@ -21,6 +24,12 @@ public class ClockLogic implements ClockInterface {
 
 	@Override
 	public void update(int hours, int minutes, int seconds) {
+		if (this.alarmHour == hours && this.alarmMinute == minutes){
+			clockGUI.alarm(true);
+		}
+		
+		System.out.println("label set called upon");
+		
 		clockGUI.setTimeOnLabel(hours + ":" + minutes + ":" + seconds);
 	}
 }
