@@ -1,0 +1,13 @@
+1. Malmö C till Lund C
+
+2. ?cmdaction=next&selPointFr=0|80000|0&selPointTo=0|81216|0&NoOf=5
+
+3. 
+	Journeys - alla "resor" man kan ta för att komma fram till sin destination.
+	Journey - en "resa" 
+	RouteLinks - alla "etapper" i en given Journey
+	RouteLink - en av "etapperna" i en Journey
+
+4. RouteLinks under Journey innehåller antalet byten, "RouteLink".
+
+5. <p></p>

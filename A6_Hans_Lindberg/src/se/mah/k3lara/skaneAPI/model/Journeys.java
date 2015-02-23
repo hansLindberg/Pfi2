@@ -19,7 +19,6 @@ public class Journeys {
 		this.journeys.add(journey);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public ArrayList<Journey> getJourneys() {
 		return journeys;
 	}
