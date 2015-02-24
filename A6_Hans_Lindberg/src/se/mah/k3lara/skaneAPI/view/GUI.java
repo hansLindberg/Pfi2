@@ -27,6 +27,8 @@ public class GUI extends JFrame {
 	JTextArea areaResult1 = new JTextArea();
 	JTextArea areaResult2 = new JTextArea();
 	
+	GUI g = this;
+	
 	private Parser p = new Parser();
 	
 	Thread t1 = new JourneysThread(p, this);
@@ -74,7 +76,7 @@ public class GUI extends JFrame {
 		JButton btn1 = new JButton("S\u00F6k");
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//t2 = new JourneysThread(p,  );
+				Thread t2 = new StationsThread(p, g);
 				t2.start();
 			}
 		});
@@ -118,9 +120,8 @@ public class GUI extends JFrame {
 		JButton btn2 = new JButton("S\u00F6k resa");
 		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//t1 = new JourneysThread(p,  );
+				Thread t1 = new JourneysThread(p, g);
 				t1.start();
-
 			}
 		});
 		btn2.setBounds(106, 23, 101, 74);
