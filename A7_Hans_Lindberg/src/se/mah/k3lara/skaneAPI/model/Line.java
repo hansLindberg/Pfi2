@@ -47,7 +47,7 @@ public class Line{
 		return this.newDepTime.get(Calendar.HOUR_OF_DAY) + ":" + this.newDepTime.get(Calendar.MINUTE);
 	}
 	public void setNewDepTime(Calendar oldDepTime, String depTimeDeviation){
-		this.newDepTime = oldDepTime + h.parseCalendarString(depTimeDeviation);
+		
 	}
 	
 	//More methods here for the rest of the tags

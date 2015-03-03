@@ -179,7 +179,6 @@ public class Parser {
 				l.setLine(lineNo);
 				l.setDepTimeDeviation(depTimeDeviation);
 				l.setDestination(toStationName);
-				l.setNewDepTime(depTime, depTimeDeviation);
 				lines.addLine(l);
 				//Ok next Line element
 			}		
