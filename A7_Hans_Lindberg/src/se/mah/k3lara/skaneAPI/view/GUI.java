@@ -8,7 +8,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import se.mah.k3lara.skaneAPI.model.Line;
 import se.mah.k3lara.skaneAPI.model.Lines;
 import se.mah.k3lara.skaneAPI.model.Station;
 import se.mah.k3lara.skaneAPI.xmlparser.Parser;
@@ -22,12 +21,14 @@ public class GUI extends JFrame {
 
 	private JPanel contentPane;
 	
+	@SuppressWarnings("unused")
 	private SearchThread t;
 
 	JLabel labelTitle = new JLabel("Ub\u00E5tshallen");
 	JLabel lblLinje = new JLabel("Linje");
 	JLabel lblNewLabel = new JLabel("Destination");
 	JLabel lblNewLabel_1 = new JLabel("Avg\u00E5r");
+	JLabel lblLateTitle = new JLabel("Sen?");
 
 	JLabel labelLinje1 = new JLabel("");
 	JLabel labelLinje2 = new JLabel("");
@@ -48,7 +49,8 @@ public class GUI extends JFrame {
 	JLabel labelLate2 = new JLabel("");
 	JLabel labelLate3 = new JLabel("");
 	JLabel labelLate4 = new JLabel("");
-
+	
+	
 
 	/**
 	 * Launch the application.
@@ -152,21 +154,28 @@ public class GUI extends JFrame {
 		labelTime4.setForeground(Color.YELLOW);
 		labelTime4.setBounds(378, 157, 46, 14);
 		contentPane.add(labelTime4);
+		
+		lblLateTitle.setForeground(Color.YELLOW);
+		lblLateTitle.setBounds(354, 573, 614, 14);
+		contentPane.add(lblLateTitle);
+		
 		labelLate1.setBounds(354, 82, 14, 14);
-		
+		labelLate1.setForeground(Color.YELLOW);
 		contentPane.add(labelLate1);
-		labelLate2.setBounds(354, 107, 14, 14);
-		
+		labelLate2.setBounds(354, 107, 13, 14);
+		labelLate2.setForeground(Color.YELLOW);
 		contentPane.add(labelLate2);
-		labelLate3.setBounds(354, 132, 14, 14);
-		
+		labelLate3.setBounds(354, 132, 14, 13);
+		labelLate3.setForeground(Color.YELLOW);
 		contentPane.add(labelLate3);
 		labelLate4.setBounds(354, 157, 14, 14);
-		
+		labelLate4.setForeground(Color.YELLOW);
 		contentPane.add(labelLate4);
 
+		//Calls the update once, to draw the labels.
 		UpdateLabels();
 		
+		//Starts the SearchThread to allow for more updates.
 		Thread t = new SearchThread(this);
 		t.start();
 		System.out.println("thread started");
@@ -175,32 +184,74 @@ public class GUI extends JFrame {
 	public void UpdateLabels(){
 		Lines lines = Parser.getStationResults(new Station("80046"));
 
+		//Line number of the bus.
 		labelLinje1.setText(lines.getLines().get(0).getLine());
 		labelLinje2.setText(lines.getLines().get(1).getLine());
 		labelLinje3.setText(lines.getLines().get(2).getLine());
 		labelLinje4.setText(lines.getLines().get(3).getLine());
 
+		//The destination of the bus.
 		labelDes1.setText(lines.getLines().get(0).getDestination());
 		labelDes2.setText(lines.getLines().get(1).getDestination());
 		labelDes3.setText(lines.getLines().get(2).getDestination());
 		labelDes4.setText(lines.getLines().get(3).getDestination());
-
+		
+		//Fixes the times, putting a '0' if needed.
 		labelTime1.setText(FixThatClock(lines.getLines().get(0).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(0).getDepTime().get(Calendar.MINUTE)));
 		labelTime2.setText(FixThatClock(lines.getLines().get(1).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(1).getDepTime().get(Calendar.MINUTE)));
 		labelTime3.setText(FixThatClock(lines.getLines().get(2).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(2).getDepTime().get(Calendar.MINUTE)));
 		labelTime4.setText(FixThatClock(lines.getLines().get(3).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(3).getDepTime().get(Calendar.MINUTE)));
+		
+		//Prints the time in minutes reflecting how late a given buss is.
+		try {
+			if (Integer.parseInt(lines.getLines().get(0).getDepTimeDeviation()) > 0){
+				labelLate1.setText("+" + lines.getLines().get(0).getDepTimeDeviation());
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println("late1 == null");
+		}
+		try {
+			if (Integer.parseInt(lines.getLines().get(1).getDepTimeDeviation()) > 0){
+				labelLate2.setText("+" + lines.getLines().get(1).getDepTimeDeviation());
+			}
+		} catch (NumberFormatException e2) {
+			// TODO Auto-generated catch block
+			//e2.printStackTrace();
+			System.out.println("late2 == null");
+		}
+		try {
+			if (Integer.parseInt(lines.getLines().get(2).getDepTimeDeviation()) > 0){
+				labelLate3.setText("+" + lines.getLines().get(2).getDepTimeDeviation());
+			}
+		} catch (NumberFormatException e1) {
+			// TODO Auto-generated catch block
+			//e1.printStackTrace();
+			System.out.println("late3 == null");
+		}
+		try {
+			if (Integer.parseInt(lines.getLines().get(3).getDepTimeDeviation()) > 0){
+				labelLate4.setText("+" + lines.getLines().get(3).getDepTimeDeviation());
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println("late4 == null");
+		}
+		
 	}
 
 	public String FixThatClock(int time){
-		// Some variables that will create a '0' if a number is single digit, to
-		// make it nicer.
+		// Used to create a '0' if a number is single digit, to
+		// make it look nicer.
 		String zero = "";
 
 		if (time < 10) {
 			zero = "0";
 		}
 
-		// Compiles the values to nice, readable strings.
+		// Compiles the value into a nice, readable string.
 		String finalTimeString = zero + Integer.toString(time);
 
 		zero = "";

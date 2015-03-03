@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Lines {
 		private ArrayList<Line> lines;
+		@SuppressWarnings("unused")
 		private Station station;
 		//Perhaps more variables and methods?
 		/**Creates a list of departing lines from a station*/

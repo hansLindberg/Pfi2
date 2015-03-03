@@ -1,7 +1,5 @@
 package se.mah.k3lara.skaneAPI.view;
 
-import java.util.Calendar;
-
 public class SearchThread extends Thread {
 	private GUI gui;
 	
@@ -13,6 +11,8 @@ public class SearchThread extends Thread {
 	
 	public void run() {
 		while (running == true){
+			
+			//Every 30 sec, make a new query to Skånetrafiken, then update the GUI.
 			try{
 				Thread.sleep(30000);
 			} catch (InterruptedException e) {
