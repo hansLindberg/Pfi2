@@ -37,7 +37,7 @@ public class TestClass {
 		Lines lines = Parser.getStationResults(new Station("80046"));
 		for (Line l : lines.getLines()) {
 			System.out.println("Bus to: " + l.getDestination() + " Line " + l.getLine() +" departs: "+l.getDepTime().get(Calendar.HOUR_OF_DAY)+":"+l.getDepTime().get(Calendar.MINUTE)+
-					" and is "+l.getDepTimeDeviation()+" minutes late" + l.getDestination());
+					" and is "+l.getDepTimeDeviation()+" minutes late");
 		}
 	}
 }

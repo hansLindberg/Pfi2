@@ -43,6 +43,11 @@ public class GUI extends JFrame {
 	JLabel labelTime2 = new JLabel("");
 	JLabel labelTime3 = new JLabel("");
 	JLabel labelTime4 = new JLabel("");
+	
+	JLabel labelLate1 = new JLabel("");
+	JLabel labelLate2 = new JLabel("");
+	JLabel labelLate3 = new JLabel("");
+	JLabel labelLate4 = new JLabel("");
 
 
 	/**
@@ -147,6 +152,18 @@ public class GUI extends JFrame {
 		labelTime4.setForeground(Color.YELLOW);
 		labelTime4.setBounds(378, 157, 46, 14);
 		contentPane.add(labelTime4);
+		labelLate1.setBounds(354, 82, 14, 14);
+		
+		contentPane.add(labelLate1);
+		labelLate2.setBounds(354, 107, 14, 14);
+		
+		contentPane.add(labelLate2);
+		labelLate3.setBounds(354, 132, 14, 14);
+		
+		contentPane.add(labelLate3);
+		labelLate4.setBounds(354, 157, 14, 14);
+		
+		contentPane.add(labelLate4);
 
 		UpdateLabels();
 		
