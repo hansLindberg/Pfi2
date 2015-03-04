@@ -28,7 +28,6 @@ public class GUI extends JFrame {
 	JLabel lblLinje = new JLabel("Linje");
 	JLabel lblNewLabel = new JLabel("Destination");
 	JLabel lblNewLabel_1 = new JLabel("Avg\u00E5r");
-	JLabel lblLateTitle = new JLabel("Sen?");
 
 	JLabel labelLinje1 = new JLabel("");
 	JLabel labelLinje2 = new JLabel("");
@@ -155,17 +154,13 @@ public class GUI extends JFrame {
 		labelTime4.setBounds(378, 157, 46, 14);
 		contentPane.add(labelTime4);
 		
-		lblLateTitle.setForeground(Color.YELLOW);
-		lblLateTitle.setBounds(354, 573, 614, 14);
-		contentPane.add(lblLateTitle);
-		
 		labelLate1.setBounds(354, 82, 14, 14);
 		labelLate1.setForeground(Color.YELLOW);
 		contentPane.add(labelLate1);
-		labelLate2.setBounds(354, 107, 13, 14);
+		labelLate2.setBounds(354, 107, 14, 14);
 		labelLate2.setForeground(Color.YELLOW);
 		contentPane.add(labelLate2);
-		labelLate3.setBounds(354, 132, 14, 13);
+		labelLate3.setBounds(354, 132, 14, 14);
 		labelLate3.setForeground(Color.YELLOW);
 		contentPane.add(labelLate3);
 		labelLate4.setBounds(354, 157, 14, 14);
@@ -202,10 +197,22 @@ public class GUI extends JFrame {
 		labelTime3.setText(FixThatClock(lines.getLines().get(2).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(2).getDepTime().get(Calendar.MINUTE)));
 		labelTime4.setText(FixThatClock(lines.getLines().get(3).getDepTime().get(Calendar.HOUR_OF_DAY)) + ":" + FixThatClock(lines.getLines().get(3).getDepTime().get(Calendar.MINUTE)));
 		
+		//Empties the late labels
+		labelLate1.setText("");
+		labelLate2.setText("");
+		labelLate3.setText("");
+		labelLate4.setText("");
+		
 		//Prints the time in minutes reflecting how late a given buss is.
 		try {
 			if (Integer.parseInt(lines.getLines().get(0).getDepTimeDeviation()) > 0){
 				labelLate1.setText("+" + lines.getLines().get(0).getDepTimeDeviation());
+			}
+			else{
+				labelLate1.setText("");
+			}
+			if (lines.getLines().get(0).getDepTimeDeviation() == null){
+				labelLate1.setText("");
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -216,6 +223,12 @@ public class GUI extends JFrame {
 			if (Integer.parseInt(lines.getLines().get(1).getDepTimeDeviation()) > 0){
 				labelLate2.setText("+" + lines.getLines().get(1).getDepTimeDeviation());
 			}
+			else{
+				labelLate2.setText("");
+			}
+			if (lines.getLines().get(1).getDepTimeDeviation() == null){
+				labelLate2.setText("");
+			}
 		} catch (NumberFormatException e2) {
 			// TODO Auto-generated catch block
 			//e2.printStackTrace();
@@ -225,6 +238,12 @@ public class GUI extends JFrame {
 			if (Integer.parseInt(lines.getLines().get(2).getDepTimeDeviation()) > 0){
 				labelLate3.setText("+" + lines.getLines().get(2).getDepTimeDeviation());
 			}
+			else{
+				labelLate3.setText("");
+			}
+			if (lines.getLines().get(2).getDepTimeDeviation() == null){
+				labelLate3.setText("");
+			}
 		} catch (NumberFormatException e1) {
 			// TODO Auto-generated catch block
 			//e1.printStackTrace();
@@ -233,6 +252,12 @@ public class GUI extends JFrame {
 		try {
 			if (Integer.parseInt(lines.getLines().get(3).getDepTimeDeviation()) > 0){
 				labelLate4.setText("+" + lines.getLines().get(3).getDepTimeDeviation());
+			}
+			else{
+				labelLate4.setText("");
+			}
+			if (lines.getLines().get(3).getDepTimeDeviation() == null){
+				labelLate4.setText("");
 			}
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block

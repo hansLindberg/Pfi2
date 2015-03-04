@@ -14,7 +14,7 @@ public class SearchThread extends Thread {
 			
 			//Every 30 sec, make a new query to Skånetrafiken, then update the GUI.
 			try{
-				Thread.sleep(30000);
+				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
